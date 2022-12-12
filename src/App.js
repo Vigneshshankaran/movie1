@@ -1,38 +1,25 @@
 import "./App.css";
-import {Welcome} from "./Welcome"
-import {AddMovies} from "./AddMovies"
-import {NotFound} from "./NotFound"
-import {ColorBox} from "./ColorBox"
+import { Nav } from "./Nav";
+import { Routers } from "./Routers";
+import { BrowserRouter as Router } from "react-router-dom";
+// import { MovieContext } from "./MovieContext";
+// import {   useContext} from "react";
 
 
 
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+
 
 export default function App() {
+
+  // const [ setMovieList] = useContext([MovieContext])
+
+  
+
   return(
 <>
-
 <Router>
-  <nav>
-    <ul>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/movies">Movies</Link>
-      </li>
-      <li>
-        <Link to="/color">Colors</Link>
-      </li>
-    </ul>
-  </nav>
-  <Routes>
-    <Route path="/" element={<Welcome />}/>
-    <Route path="/movies" element={<AddMovies />}/>
-    <Route path="/color" element = {<ColorBox />}/>
-
-    <Route path="*" element={<NotFound />}/>
-  </Routes>
+<Nav />
+<Routers />
 </Router>
     </>
   );

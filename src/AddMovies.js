@@ -1,15 +1,32 @@
-import { useState } from "react";
-import { MovieList } from "./Components/MovieList";
-import { INITIAL_MOVIE } from "./INITIAL_MOVIE";
- 
+import { useState, } from "react";
+import {  useNavigate } from "react-router-dom";
+// import { MovieContext } from "./MovieContext"
+
  export function AddMovies() {
+const navigate = useNavigate();
 
-
-  const [movieList, setMovieList] = useState(INITIAL_MOVIE);
   const [name, setName] = useState("");
   const [rating, setRating] = useState("");
   const [summary, setSummary] = useState("");
   const [pic, setPic] = useState("");
+
+const addMovie = () => {
+  const newMovies = {
+    name,
+    rating,
+    summary,
+    pic,
+  };
+  fetch("https://61c8fe11adee460017260eb5.mockapi.io/movie",{
+    method: "POST",
+    body: JSON.stringify(newMovies),
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+  .then(() =>  navigate("/movies"))
+}
+
 
   return (
     <div className="App">
@@ -24,15 +41,7 @@ import { INITIAL_MOVIE } from "./INITIAL_MOVIE";
                     Add Colors
                   </button> */}
 
-      <button onClick={() => {
-        const newMovies = {
-          name,
-          rating,
-          summary,
-          pic,
-        };
-        setMovieList([...movieList, newMovies]);
-      }}>
+      <button onClick={addMovie}>
         Add Movies</button>
 
       {/*
@@ -46,7 +55,6 @@ import { INITIAL_MOVIE } from "./INITIAL_MOVIE";
                       />
                     );
                   })}  */}
-      <MovieList movies={movieList} />
 
     </div>
   );
